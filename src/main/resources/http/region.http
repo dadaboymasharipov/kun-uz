@@ -1,0 +1,31 @@
+### Create region
+POST localhost:8080/region/create
+Content-Type: application/json
+
+{
+  "orderNumber": 2,
+  "nameUz": "Region5 uz",
+  "nameEn": "Region5 en",
+  "nameRu": "Region5 ru"
+}
+
+### Get all regions for ADMIN
+GET http://localhost:8080/region/all
+
+### Get all by lang
+GET localhost:8080/region/lang
+Accept-Language: EN
+
+### Update by Id
+PUT http://localhost:8080/region/update/5
+Content-Type: application/json
+
+{
+  "orderNumber": 200000,
+  "nameUz": "Region5 uz new",
+  "nameRu": "Region5 ru updated",
+  "nameEn": "Region5 en updated"
+}
+
+### Delete Region by Id
+DELETE http://localhost:8080/region/delete/5
