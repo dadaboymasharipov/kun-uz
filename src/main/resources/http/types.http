@@ -1,0 +1,28 @@
+### Create type
+POST http://localhost:8080/types/create
+Content-Type: application/json
+
+{
+  "orderNumber": 4,
+  "nameUz": "Type4 uz",
+  "nameRu": "Type4 ru",
+  "nameEn": "Type4 en"
+}
+
+### Get all for ADMIN
+GET http://localhost:8080/types/getAll
+
+### Get by lang
+GET http://localhost:8080/types/lang
+Accept-Language: UZ
+
+### Update type by id
+PUT http://localhost:8080/types/update/5
+Content-Type: application/json
+
+{
+  "orderNumber": 980,
+  "nameUz": "Type4 uz",
+  "nameRu": "Type4 ru",
+  "nameEn": "Type4 en"
+}

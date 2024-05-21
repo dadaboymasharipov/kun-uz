@@ -5,7 +5,6 @@ import com.example.kunuz.dto.RegionDTO;
 import com.example.kunuz.entity.RegionEntity;
 import com.example.kunuz.enums.LanguageEnum;
 import com.example.kunuz.exception.AppBadException;
-import com.example.kunuz.mapper.MapRegionEntityToRegionDto;
 import com.example.kunuz.mapper.RegionMapper;
 import com.example.kunuz.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +26,15 @@ public class RegionService {
         entity.setNameEn(dto.getNameEn());
 
         regionRepository.save(entity);
-        return new MapRegionEntityToRegionDto().apply(entity);
+
+        return mapToDto(entity);
     }
 
 
     public List<RegionDTO> getAll() {
         Iterable<RegionEntity> entityList = regionRepository.findAll();
         List<RegionDTO> dtoList = new LinkedList<>();
-        entityList.forEach((entity) ->
-                dtoList.add(new MapRegionEntityToRegionDto().apply(entity)));
+        entityList.forEach((entity) -> dtoList.add(mapToDto(entity)));
         return dtoList;
     }
 
@@ -51,7 +50,6 @@ public class RegionService {
         return dtoList;
     }
 
-
     public Boolean update(Integer id, RegionCreateDTO region) {
         RegionEntity regionEntity = get(id);
         regionEntity.setOrderNumber(regionEntity.getOrderNumber());
@@ -62,14 +60,26 @@ public class RegionService {
         return true;
     }
 
-    private RegionEntity get(Integer id) {
-        return regionRepository.findById(id).orElseThrow(
-                () -> new AppBadException("Region is not found"));
-    }
-
     public Boolean delete(Integer id) {
         RegionEntity regionEntity = get(id);
         regionRepository.delete(regionEntity);
         return true;
+    }
+
+    private RegionEntity get(Integer id) {
+        return regionRepository.findById(id).orElseThrow(
+                () -> new AppBadException("Region is not found by id " + id));
+    }
+
+    private RegionDTO mapToDto(RegionEntity entity) {
+        RegionDTO dto = new RegionDTO();
+        dto.setId(entity.getId());
+        dto.setNameUz(entity.getNameUz());
+        dto.setNameEn(entity.getNameEn());
+        dto.setNameRu(entity.getNameRu());
+        dto.setOrderNumber(entity.getOrderNumber());
+        dto.setCreatedDate(entity.getCreatedDate());
+
+        return dto;
     }
 }

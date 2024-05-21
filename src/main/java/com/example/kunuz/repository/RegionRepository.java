@@ -20,7 +20,7 @@ public interface RegionRepository extends CrudRepository<RegionEntity, Integer> 
             "   WHEN 'EN' THEN name_en " +
             "   WHEN 'RU' THEN name_ru " +
             "  END as name " +
-            "from region; ", nativeQuery = true)
+            "from region order by order_number desc; ", nativeQuery = true)
     List<RegionMapper> findAll(@Param("lang") String lang);
 
 
