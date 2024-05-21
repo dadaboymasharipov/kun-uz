@@ -3,21 +3,21 @@ POST http://localhost:8080/types/create
 Content-Type: application/json
 
 {
-  "orderNumber": 4,
-  "nameUz": "Type4 uz",
-  "nameRu": "Type4 ru",
-  "nameEn": "Type4 en"
+  "orderNumber": 10,
+  "nameUz": "Type10 uz",
+  "nameRu": "Type10 ru",
+  "nameEn": "Type10 en"
 }
 
-### Get all for ADMIN
+### Get all types for ADMIN
 GET http://localhost:8080/types/getAll
 
-### Get by lang
+### Get all types by lang
 GET http://localhost:8080/types/lang
 Accept-Language: UZ
 
 ### Update type by id
-PUT http://localhost:8080/types/update/5
+PUT http://localhost:8080/types/update/6
 Content-Type: application/json
 
 {
@@ -26,3 +26,6 @@ Content-Type: application/json
   "nameRu": "Type4 ru",
   "nameEn": "Type4 en"
 }
+
+### Delete type by Id
+DELETE http://localhost:8080/types/delete/6

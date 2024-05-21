@@ -1,12 +1,13 @@
 package com.example.kunuz.service;
 
-import com.example.kunuz.dto.TypesCreateDTO;
+import com.example.kunuz.dto.CategoryCreateDTO;
 import com.example.kunuz.dto.CategoryDTO;
-import com.example.kunuz.entity.TypesEntity;
+import com.example.kunuz.entity.CategoryEntity;
 import com.example.kunuz.enums.LanguageEnum;
 import com.example.kunuz.exception.AppBadException;
+import com.example.kunuz.mapper.CategoryMapper;
 import com.example.kunuz.mapper.TypeMapper;
-import com.example.kunuz.repository.TypesRepository;
+import com.example.kunuz.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,28 +15,29 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public class TypesService {
+public class CategoryService {
+
 
     @Autowired
-    private TypesRepository typesRepository;
+    private CategoryRepository categoryRepository;
 
-    public CategoryDTO create(TypesCreateDTO dto) {
-        TypesEntity entity = new TypesEntity();
+    public CategoryDTO create(CategoryCreateDTO dto) {
+        CategoryEntity entity = new CategoryEntity();
         entity.setOrderNumber(dto.getOrderNumber());
         entity.setNameUz(dto.getNameUz());
         entity.setNameRu(dto.getNameRu());
         entity.setNameEn(dto.getNameEn());
 
-        typesRepository.save(entity);
+        categoryRepository.save(entity);
         return mapToDto(entity);
     }
 
-    private TypesEntity get(Integer id) {
-        return typesRepository.findById(id).orElseThrow(
-                () -> new AppBadException("Type is not found by id " + id));
+    private CategoryEntity get(Integer id) {
+        return categoryRepository.findById(id).orElseThrow(
+                () -> new AppBadException("Category is not found by id " + id));
     }
 
-    private CategoryDTO mapToDto(TypesEntity entity) {
+    private CategoryDTO mapToDto(CategoryEntity entity) {
         CategoryDTO dto = new CategoryDTO();
         dto.setId(entity.getId());
         dto.setNameUz(entity.getNameUz());
@@ -48,7 +50,7 @@ public class TypesService {
     }
 
     public List<CategoryDTO> getAll() {
-        List<TypesEntity> types = typesRepository.findAll();
+        List<CategoryEntity> types = categoryRepository.findAll();
         List<CategoryDTO> result = new LinkedList<>();
 
         types.forEach(entity -> result.add(mapToDto(entity)));
@@ -56,9 +58,9 @@ public class TypesService {
     }
 
     public List<CategoryDTO> getAllByLang(LanguageEnum lang) {
-        List<TypeMapper> types = typesRepository.findAllByLang(lang.name());
+        List<CategoryMapper> types = categoryRepository.findAllByLang(lang.name());
         List<CategoryDTO> result = new LinkedList<>();
-        for (TypeMapper type : types) {
+        for (CategoryMapper type : types) {
             CategoryDTO typesDto = new CategoryDTO();
             typesDto.setId(type.getId());
             typesDto.setName(type.getName());
@@ -68,19 +70,19 @@ public class TypesService {
     }
 
 
-    public Boolean update(Integer id, TypesCreateDTO dto) {
-        TypesEntity entity = get(id);
+    public Boolean update(Integer id, CategoryCreateDTO dto) {
+        CategoryEntity entity = get(id);
         entity.setOrderNumber(dto.getOrderNumber());
         entity.setNameUz(dto.getNameUz());
         entity.setNameRu(dto.getNameRu());
         entity.setNameEn(dto.getNameEn());
-        typesRepository.save(entity);
+        categoryRepository.save(entity);
         return true;
     }
 
     public Boolean delete(Integer id) {
-        TypesEntity entity = get(id);
-        typesRepository.delete(entity);
+        CategoryEntity entity = get(id);
+        categoryRepository.delete(entity);
         return true;
     }
 }

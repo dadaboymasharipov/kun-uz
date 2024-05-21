@@ -1,7 +1,7 @@
 package com.example.kunuz.controller;
 
 import com.example.kunuz.dto.TypesCreateDTO;
-import com.example.kunuz.dto.TypesDto;
+import com.example.kunuz.dto.CategoryDTO;
 import com.example.kunuz.enums.LanguageEnum;
 import com.example.kunuz.service.TypesService;
 import jakarta.validation.Valid;
@@ -19,21 +19,21 @@ public class TypesController {
     private TypesService typesService;
 
     @PostMapping("/create")
-    public ResponseEntity<TypesDto> create(@Valid @RequestBody TypesCreateDTO typesCreateDTO) {
-        TypesDto type = typesService.create(typesCreateDTO);
+    public ResponseEntity<CategoryDTO> create(@Valid @RequestBody TypesCreateDTO typesCreateDTO) {
+        CategoryDTO type = typesService.create(typesCreateDTO);
         return ResponseEntity.ok(type);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<TypesDto>> getAll() {
-        List<TypesDto> list = typesService.getAll();
+    public ResponseEntity<List<CategoryDTO>> getAll() {
+        List<CategoryDTO> list = typesService.getAll();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/lang")
-    public ResponseEntity<List<TypesDto>> getAllByLang(
+    public ResponseEntity<List<CategoryDTO>> getAllByLang(
             @RequestHeader(value = "Accept-Language", defaultValue = "UZ") LanguageEnum lang) {
-        List<TypesDto> list = typesService.getAllByLang(lang);
+        List<CategoryDTO> list = typesService.getAllByLang(lang);
         return ResponseEntity.ok(list);
     }
 

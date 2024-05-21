@@ -12,11 +12,11 @@ Content-Type: application/json
 ### Get all regions for ADMIN
 GET http://localhost:8080/region/all
 
-### Get all by lang
+### Get all regions by lang
 GET localhost:8080/region/lang
 Accept-Language: EN
 
-### Update by Id
+### Update region by Id
 PUT http://localhost:8080/region/update/5
 Content-Type: application/json
 
