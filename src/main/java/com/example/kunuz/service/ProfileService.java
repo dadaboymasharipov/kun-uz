@@ -6,6 +6,7 @@ import com.example.kunuz.dto.ProfileFilterDTO;
 import com.example.kunuz.entity.ProfileEntity;
 import com.example.kunuz.exception.AppBadException;
 import com.example.kunuz.repository.ProfileRepository;
+import com.example.kunuz.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class ProfileService {
         entity.setEmail(dto.getEmail());
         entity.setPhone(dto.getPhone());
         entity.setRole(dto.getRole());
-        entity.setPassword(dto.getPassword());
+        entity.setPassword(MD5Util.getMD5(dto.getPassword()));
 //        entity.setPhoto(dto.getPhoto());/TODO: include photo
         entity.setStatus(dto.getStatus());
         profileRepository.save(entity);
