@@ -1,0 +1,31 @@
+### Create a profile
+POST http://localhost:8080/profile/create
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "surname": "Olimov",
+  "email": "aliolimov@gmail.com",
+  "phone": "+99891",
+  "password": "12345",
+  "status": "ACTIVE",
+  "role": "ROLE_USER"
+}
+
+### Get profiles woth pagination
+GET http://localhost:8080/profile/pagination?page=1&size=10
+
+### Update profile
+PUT http://localhost:8080/profile/update/
+Content-Type: application/json
+
+{
+  "name": "updated name",
+  "surname": "updated surname",
+  "email": "updatedemail@gmail.com",
+  "phone": "updated phone",
+  "role": "ROLE_USER"
+}
+
+### Delete profile by id
+DELETE http://localhost:8080/profile/delete/

@@ -4,11 +4,15 @@ import com.example.kunuz.enums.ProfileRole;
 import com.example.kunuz.enums.ProfileStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "profile")
+@Setter
+@Getter
 public class ProfileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,9 +27,9 @@ public class ProfileEntity {
     private String phone;
     @Column(name = "password")
     private String password;
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private ProfileStatus status;
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private ProfileRole role;
     @Column(name = "visible")
     private Boolean visible = Boolean.TRUE;
