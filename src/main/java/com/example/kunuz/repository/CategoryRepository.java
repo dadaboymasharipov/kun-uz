@@ -18,4 +18,7 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Intege
             "     END as name " +
             " FROM category order by order_number desc;", nativeQuery = true)
     List<CategoryMapper> findAllByLang(@Param("lang") String lang);
+
+    @Query(value = "from CategoryEntity order by orderNumber")
+    List<CategoryEntity> findAllOrderByOrderNumber();
 }

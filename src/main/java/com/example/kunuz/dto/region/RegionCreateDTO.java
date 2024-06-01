@@ -1,4 +1,4 @@
-package com.example.kunuz.dto;
+package com.example.kunuz.dto.region;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TypesCreateDTO {
+public class RegionCreateDTO {
     @NotNull(message = "orderNumber cannot be null")
     private Integer orderNumber;
     @NotBlank(message = "nameUz cannot be blank")

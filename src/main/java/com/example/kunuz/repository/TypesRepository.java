@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface TypesRepository extends JpaRepository<TypesEntity, Integer> {
@@ -18,4 +19,6 @@ public interface TypesRepository extends JpaRepository<TypesEntity, Integer> {
             "     END as name " +
             " FROM type order by order_number desc;", nativeQuery = true)
     List<TypeMapper> findAllByLang(@Param("lang") String lang);
+
+    List<TypesEntity> findAllByIdIsInAndVisibleTrue(Collection<Integer> id);
 }

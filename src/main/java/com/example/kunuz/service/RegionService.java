@@ -1,7 +1,7 @@
 package com.example.kunuz.service;
 
-import com.example.kunuz.dto.RegionCreateDTO;
-import com.example.kunuz.dto.RegionDTO;
+import com.example.kunuz.dto.region.RegionCreateDTO;
+import com.example.kunuz.dto.region.RegionDTO;
 import com.example.kunuz.entity.RegionEntity;
 import com.example.kunuz.enums.LanguageEnum;
 import com.example.kunuz.exception.AppBadException;

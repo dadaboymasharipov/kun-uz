@@ -1,12 +1,11 @@
 package com.example.kunuz.service;
 
-import com.example.kunuz.dto.CategoryCreateDTO;
-import com.example.kunuz.dto.CategoryDTO;
+import com.example.kunuz.dto.category.CategoryDTO;
+import com.example.kunuz.dto.category.CategoryCreateDTO;
 import com.example.kunuz.entity.CategoryEntity;
 import com.example.kunuz.enums.LanguageEnum;
 import com.example.kunuz.exception.AppBadException;
 import com.example.kunuz.mapper.CategoryMapper;
-import com.example.kunuz.mapper.TypeMapper;
 import com.example.kunuz.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +49,7 @@ public class CategoryService {
     }
 
     public List<CategoryDTO> getAll() {
-        List<CategoryEntity> types = categoryRepository.findAll();
+        List<CategoryEntity> types = categoryRepository.findAllOrderByOrderNumber();
         List<CategoryDTO> result = new LinkedList<>();
 
         types.forEach(entity -> result.add(mapToDto(entity)));

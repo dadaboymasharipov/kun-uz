@@ -1,7 +1,7 @@
 package com.example.kunuz.repository;
 
-import com.example.kunuz.dto.ProfileDTO;
-import com.example.kunuz.dto.ProfileFilterDTO;
+import com.example.kunuz.dto.profile.ProfileDTO;
+import com.example.kunuz.dto.profile.ProfileFilterDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,14 @@
 ### Create a profile
+###Correct token: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTcwODE2NjMsImlkIjoiZGQ1ZTU3MjAtNmI1NS00NGY1LTgzOTEtMjhjMWQ4ZDA1NmQ2Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTcxNjgwNjMsImlzcyI6Ikt1blV6VGVzdCJ9.B4I12C7mWjwl-V7p3BWQ_7gIBDphTBFkuiLpbYYpJVMDvfvLHVK8TSdI9a_XHmIUnw9RGHAb61OMBQ8_Jhd3jA
 POST http://localhost:8080/profile/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTcwODE2NjMsImlkIjoiZGQ1ZTU3MjAtNmI1NS00NGY1LTgzOTEtMjhjMWQ4ZDA1NmQ2Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTcxNjgwNjMsImlzcyI6Ikt1blV6VGVzdCJ9.B4I12C7mWjwl-V7p3BWQ_7gIBDphTBFkuiLpbYYpJVMDvfvLHVK8TSdI9a_XHmIUnw9RGHAb61OMBQ8_Jhd3jA
 
 {
-  "name": "Ali",
-  "surname": "Olimov",
-  "email": "aliolimov@gmail.com",
-  "phone": "+99891",
+  "name": "Someone",
+  "surname": "Someone",
+  "email": "121assas@gmail.com",
+  "phone": "+99891222",
   "password": "12345",
   "status": "ACTIVE",
   "role": "ROLE_USER"
@@ -16,7 +18,7 @@ Content-Type: application/json
 GET http://localhost:8080/profile/pagination?page=1&size=10
 
 ### Update profile
-PUT http://localhost:8080/profile/update/
+PUT http://localhost:8080/profile/update/dd5e5720-6b55-44f5-8391-28c1d8d056d6
 Content-Type: application/json
 
 {
@@ -24,8 +26,25 @@ Content-Type: application/json
   "surname": "updated surname",
   "email": "updatedemail@gmail.com",
   "phone": "updated phone",
+  "password": "2003",
+  "status": "ACTIVE",
+  "role": "ROLE_USER"
+}
+
+### Update profile
+PUT http://localhost:8080/profile/current
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTY5MTAwMjksImlkIjoiZGQ1ZTU3MjAtNmI1NS00NGY1LTgzOTEtMjhjMWQ4ZDA1NmQ2Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcxNjk5NjQyOSwiaXNzIjoiS3VuVXpUZXN0In0.YU1djSWvB-YtwfESrLrQifF1ge3TSGEai0YZRHfNUENdKMzZ-0RavWvKYDimRB-j5xGUh-mFGBir1IrJ-Cq3_A
+
+{
+  "name": "updated name",
+  "surname": "updated surname",
+  "email": "updatedemail@gmail.com",
+  "phone": "updated phone",
+  "password": "2003",
+  "status": "ACTIVE",
   "role": "ROLE_USER"
 }
 
 ### Delete profile by id
-DELETE http://localhost:8080/profile/delete/
+DELETE http://localhost:8080/profile/delete/3b3f87db-ab70-42ad-b5d0-efd75b9c85d5

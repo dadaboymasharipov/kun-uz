@@ -1,9 +1,10 @@
-package com.example.kunuz.dto;
+package com.example.kunuz.dto.profile;
 
 import com.example.kunuz.enums.ProfileRole;
 import com.example.kunuz.enums.ProfileStatus;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +21,8 @@ public class ProfileCreateDTO {
     private String phone;
     @NotBlank(message = "password cannot be blank")
     private String password;
-    @NotBlank(message = "status cannot be blank")
+    @NotNull(message = "status cannot be null")
     private ProfileStatus status;
-    @NotBlank(message = "role cannot be blank")
+    @NotNull(message = "role cannot be null")
     private ProfileRole role;
 }

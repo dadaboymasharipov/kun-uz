@@ -1,13 +1,14 @@
 package com.example.kunuz.service;
 
-import com.example.kunuz.dto.TypesCreateDTO;
-import com.example.kunuz.dto.CategoryDTO;
+import com.example.kunuz.dto.category.CategoryDTO;
+import com.example.kunuz.dto.types.TypesCreateDTO;
 import com.example.kunuz.entity.TypesEntity;
 import com.example.kunuz.enums.LanguageEnum;
 import com.example.kunuz.exception.AppBadException;
 import com.example.kunuz.mapper.TypeMapper;
 import com.example.kunuz.repository.TypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -47,12 +48,17 @@ public class TypesService {
         return dto;
     }
 
-    public List<CategoryDTO> getAll() {
-        List<TypesEntity> types = typesRepository.findAll();
+    public Page<CategoryDTO> getAllByPagination(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("created_date").descending());
+        Page<TypesEntity> entities = typesRepository.findAll(pageable);
         List<CategoryDTO> result = new LinkedList<>();
 
-        types.forEach(entity -> result.add(mapToDto(entity)));
-        return result;
+        for (TypesEntity entity : entities.getContent()) {
+            result.add(mapToDto(entity));
+        }
+        long totalElements = entities.getTotalElements();
+
+        return new PageImpl<>(result, pageable, totalElements);
     }
 
     public List<CategoryDTO> getAllByLang(LanguageEnum lang) {

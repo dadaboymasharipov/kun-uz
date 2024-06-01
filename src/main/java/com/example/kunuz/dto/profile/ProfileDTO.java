@@ -1,14 +1,9 @@
-package com.example.kunuz.dto;
+package com.example.kunuz.dto.profile;
 
 import com.example.kunuz.entity.AttachmentEntity;
 import com.example.kunuz.enums.ProfileRole;
 import com.example.kunuz.enums.ProfileStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.Column;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,4 +23,5 @@ public class ProfileDTO {
     private Boolean visible = Boolean.TRUE;
     private LocalDateTime createdDate = LocalDateTime.now();
     private AttachmentEntity photo;
+    private String token;
 }

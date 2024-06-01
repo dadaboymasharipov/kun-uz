@@ -1,8 +1,6 @@
-package com.example.kunuz.dto;
+package com.example.kunuz.dto.profile;
 
-import com.example.kunuz.entity.AttachmentEntity;
 import com.example.kunuz.enums.ProfileRole;
-import com.example.kunuz.enums.ProfileStatus;
 import lombok.Getter;
 import lombok.Setter;
 

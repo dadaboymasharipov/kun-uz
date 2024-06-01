@@ -1,9 +1,11 @@
 package com.example.kunuz.service;
 
-import com.example.kunuz.dto.ProfileCreateDTO;
-import com.example.kunuz.dto.ProfileDTO;
-import com.example.kunuz.dto.ProfileFilterDTO;
+import com.example.kunuz.dto.auth.LoginDTO;
+import com.example.kunuz.dto.profile.ProfileCreateDTO;
+import com.example.kunuz.dto.profile.ProfileDTO;
+import com.example.kunuz.dto.profile.ProfileFilterDTO;
 import com.example.kunuz.entity.ProfileEntity;
+import com.example.kunuz.enums.ProfileStatus;
 import com.example.kunuz.exception.AppBadException;
 import com.example.kunuz.repository.ProfileRepository;
 import com.example.kunuz.util.MD5Util;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfileService {
@@ -77,18 +80,18 @@ public class ProfileService {
 
     public Boolean update(String id, ProfileCreateDTO dto) {
 
-        if (profileRepository.existsByEmailAndVisibleTrue(dto.getEmail())){
-            throw new AppBadException("This email is already registered");
-        }
+//        if (profileRepository.existsByEmailAndVisibleTrue(dto.getEmail())){
+//            throw new AppBadException("This email is already registered");
+//        }
 
         ProfileEntity entity = get(id);
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
-        entity.setEmail(dto.getEmail());
-        entity.setPhone(dto.getPhone());
-        entity.setRole(dto.getRole());
-        entity.setPassword(dto.getPassword());
-        entity.setStatus(dto.getStatus());
+//        entity.setEmail(dto.getEmail());//TODO: They need extra step verification
+//        entity.setPhone(dto.getPhone());
+//        entity.setRole(dto.getRole());
+//        entity.setPassword(MD5Util.getMD5(dto.getPassword()));
+//        entity.setStatus(dto.getStatus());
         profileRepository.save(entity);
         return true;
     }
@@ -102,4 +105,5 @@ public class ProfileService {
     public PageImpl<ProfileDTO> filter(ProfileFilterDTO dto) {
         return null;
     }
+
 }

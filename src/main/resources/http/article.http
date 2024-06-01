@@ -1,0 +1,36 @@
+###Create Article MODERATOR
+POST http://localhost:8080/article/create
+Content-Type: application/json
+
+{
+  "title": "createArticle",
+  "description": "This article is a test article",
+  "content": "Some article",
+  "imageId": 1,
+  "regionId": 1,
+  "categoryId": 1,
+  "publisherId": "UUID",
+  "types": [1,2,3]
+}
+
+### Update article MODERATOR
+POST http://localhost:8080/article/update/{{id}}
+Content-Type: application/json
+
+{
+  "title": "new title",
+  "description": "new description",
+  "content": "some changes have been made",
+  "sharedCount": 100000,
+  "imageId": 1,
+  "regionId": 2,
+  "categoryId": 3,
+  "publisherId": "uuid2",
+  "types": [2]
+}
+
+### Delete by id MODERATOR
+DELETE http://localhost:8080/article/delete/{{id}}
+
+### Change status by id MODERATOR
+PUT http://localhost:8080/article/status/{{id}}?status=NOT_PUBLISHED

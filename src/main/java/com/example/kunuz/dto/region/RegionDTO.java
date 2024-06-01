@@ -1,4 +1,4 @@
-package com.example.kunuz.dto;
+package com.example.kunuz.dto.region;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TypesDTO {
+public class RegionDTO {
     private Integer id;
     private Integer orderNumber;
     private String nameUz;
@@ -19,3 +19,4 @@ public class TypesDTO {
     private Boolean visible;
     private LocalDateTime createdDate;
 }
+

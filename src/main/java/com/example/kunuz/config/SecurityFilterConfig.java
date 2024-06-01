@@ -9,16 +9,16 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SecurityFilterConfig {
-    @Autowired
-    private TokenFilter tokenFilter;
-
-    @Bean
-    public FilterRegistrationBean<Filter> filterRegistrationBean() {
-        FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
-        bean.setFilter(tokenFilter);
-        bean.addUrlPatterns("/profile/create");
-        bean.addUrlPatterns("/profile/update/*");
-        return bean;
-    }
+//    @Autowired
+//    private TokenFilter tokenFilter;
+//
+//    @Bean
+//    public FilterRegistrationBean<Filter> filterRegistrationBean() {
+//        FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
+//        bean.setFilter(tokenFilter);
+//        bean.addUrlPatterns("/profile/create");
+//        bean.addUrlPatterns("/profile/update/*");
+//        return bean;
+//    }
 
 }
