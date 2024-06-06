@@ -25,32 +25,26 @@ public class ArticleService {
     @Autowired
     private ArticleTypesService articleTypesService;
 
-    public ArticleDTO create(ArticleCreateDTO createDTO) {
+    public ArticleDTO create(ArticleCreateDTO dto) {
         String moderatorId = SecurityUtil.getProfileId();
         //TODO: check if image exists
         ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setTitle(createDTO.getTitle());
-        articleEntity.setDescription(createDTO.getDescription());
-        articleEntity.setContent(createDTO.getContent());
+        articleEntity.setTitle(dto.getTitle());
+        articleEntity.setDescription(dto.getDescription());
+        articleEntity.setContent(dto.getContent());
         articleEntity.setSharedCount(0);
-        articleEntity.setRegionId(createDTO.getRegionId());
-        articleEntity.setCategoryId(createDTO.getCategoryId());
+        articleEntity.setRegionId(dto.getRegionId());
+        articleEntity.setCategoryId(dto.getCategoryId());
         articleEntity.setModeratorId(moderatorId);
         //TODO: setImage()
         articleEntity.setViewCount(0);
 
         articleRepository.save(articleEntity);
-        articleTypesService.create(articleEntity.getId(), createDTO.getTypes());
+        articleTypesService.create(articleEntity.getId(), dto.getTypes());
         return mapToDto(articleEntity);
     }
 
     public Boolean update(String id, ArticleCreateDTO dto) {
-
-        RegionEntity regionEntity = regionRepository.findById(dto.getRegionId())
-                .orElseThrow(() -> new AppBadException("Region is not found"));
-        CategoryEntity categoryEntity = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(() -> new AppBadException("Category is not found"));
-
 
         ArticleEntity articleEntity = get(id);
         articleEntity.setTitle(dto.getTitle());
@@ -58,11 +52,13 @@ public class ArticleService {
         articleEntity.setDescription(dto.getDescription());
         articleEntity.setSharedCount(dto.getSharedCount());
         // TODO: remove old image -> setImage()
-        articleEntity.setRegion(regionEntity);
-        articleEntity.setCategory(categoryEntity);
+        articleEntity.setRegionId(dto.getRegionId());
+        articleEntity.setCategoryId(dto.getCategoryId());
         articleEntity.setStatus(NOT_PUBLISHED);
 
         articleRepository.save(articleEntity);
+        articleTypesService.merge(articleEntity.getId(), dto.getTypes());
+
         return true;
     }
 
@@ -97,7 +93,7 @@ public class ArticleService {
     }
 
     public ArticleEntity get(String id) {
-        return articleRepository.findById(id)
+        return articleRepository.findByIdAndVisibleTrue(id)
                 .orElseThrow(() -> new AppBadException("Article is not found"));
     }
 

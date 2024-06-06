@@ -24,10 +24,6 @@ public class ArticleCreateDTO {
     private Integer regionId;
     @NotNull(message = "category_id cannot be null")
     private Integer categoryId;
-//    @NotNull(message = "moderator_id cannot be null")
-//    private String moderatorId;//TODO: ask if this should be added
-//    @NotNull(message = "publisher_id cannot be null")
-    private String publisherId;
     @NotEmpty(message = "types cannot be empty")
     private List<Integer> types;
 }

@@ -8,7 +8,8 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
 
 public class JwtUtil {
-    private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
+    private static final long tokenLiveTime = (long) 1000 * 3600 * 24 * 30;
+    //TODO: change token lifetime to 1 day and type to integer
     private static final String secretKey = "very_long_mazgiskjdh2skjdhadasdasg7SomethinsInsideThisLeyfgdfgdwiodjiwojoeweiwomieowjwdoeiwjdmioewwidewjioewmewimwdoiewjdowaThatDoesn'tMakeSenseksmdnduiwjiewododwlamssiwfd";
 
     public static String encode(String profileId, String username, ProfileRole role) {

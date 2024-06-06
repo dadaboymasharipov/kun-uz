@@ -3,9 +3,9 @@ POST http://localhost:8080/auth/registration
 Content-Type: application/json
 
 {
-  "name": "new Account",
-  "surname": "new Account",
-  "email": "dadaboymasharipov512@gmail.com",
+  "name": "{{$random.alphabetic(6)}}",
+  "surname": "{{$random.alphabetic(6)}}",
+  "email": "randomEmail@gmail.com",
   "password": "12345"
 }
 
@@ -17,6 +17,6 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "login": "dadaboymasharipov512@gmail.com",
+  "login": "randomEmail@gmail.com",
   "password": "12345"
 }

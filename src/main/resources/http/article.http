@@ -1,6 +1,7 @@
 ###Create Article MODERATOR
-POST http://localhost:8080/article/create
+POST http://localhost:8080/article/moderator
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NzkwMTksImlkIjoiYzc1NjY3ZWQtNjYyOS00NGUyLWIzOTEtOGY5ZGFkNDhhNmM0Iiwicm9sZSI6IlJPTEVfVVNFUiIsInVzZXJuYW1lIjoicmFuZG9tRW1haWxAZ21haWwuY29tIiwiZXhwIjoxNzE3NzY1NDE5LCJpc3MiOiJLdW5VelRlc3QifQ.FpkmxCzWyxSs_jQtpNaqWZwXpfsUTD0MqO4xfsJfGh4dMkSa3SN9KVoTpl920rn4xEa_fus76p4c_hT4IH9htw
 
 {
   "title": "createArticle",
@@ -14,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Update article MODERATOR
-POST http://localhost:8080/article/update/{{id}}
+POST http://localhost:8080/article/moderator/{{id}}
 Content-Type: application/json
 
 {

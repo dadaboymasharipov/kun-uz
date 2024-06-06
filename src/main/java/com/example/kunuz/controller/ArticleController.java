@@ -21,20 +21,20 @@ public class ArticleController {
         return ResponseEntity.ok(articleDTO);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/moderator/{id}")
     public HttpEntity<Boolean> update(@RequestBody ArticleCreateDTO dto,
                                       @PathVariable("id") String id) {
         Boolean updated = articleService.update(id, dto);
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/moderator/delete/{id}")
     public HttpEntity<Boolean> delete(@PathVariable String id) {
         Boolean updated = articleService.delete(id);
         return ResponseEntity.ok(updated);
     }
 
-    @PutMapping("/status/{id}")
+    @PutMapping("/moderator/status/{id}")
     public HttpEntity<Boolean> changeStatus(@PathVariable("id") String id,
                                             @RequestBody ArticleDTO articleDTO) {
         Boolean updated = articleService.changeStatus(id, articleDTO);

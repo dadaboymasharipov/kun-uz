@@ -67,6 +67,9 @@ public class ArticleEntity {
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
+    @Column(name = "published_date")
+    private LocalDateTime publishedDate;
+
     @Column(name = "visible")
     private Boolean visible = Boolean.TRUE;
 
