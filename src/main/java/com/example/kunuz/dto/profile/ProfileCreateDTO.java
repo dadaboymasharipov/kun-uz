@@ -15,6 +15,7 @@ public class ProfileCreateDTO {
     private String name;
     @NotBlank(message = "surname cannot be blank")
     private String surname;
+    @NotBlank(message = "email cannot be blank")
     @Email(message = "please enter valid email")
     private String email;
     @NotBlank(message = "phone cannot be blank")

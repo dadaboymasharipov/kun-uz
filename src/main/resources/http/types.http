@@ -1,31 +1,35 @@
 ### Create type
-POST http://localhost:8080/types/create
+POST http://localhost:8080/types/adm/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w
 
 {
-  "orderNumber": 10,
-  "nameUz": "Type10 uz",
-  "nameRu": "Type10 ru",
-  "nameEn": "Type10 en"
+  "orderNumber": {{$random.integer(10)}},
+  "nameUz": "{{$random.alphabetic(5)}} uz",
+  "nameRu": "{{$random.alphabetic(5)}} ru",
+  "nameEn": "{{$random.alphabetic(5)}} en"
 }
 
 ### Get all types for ADMIN
-GET http://localhost:8080/types/getAll
+GET http://localhost:8080/types/adm/getAll?page=2&size=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w
 
 ### Get all types by lang
 GET http://localhost:8080/types/lang
 Accept-Language: UZ
 
 ### Update type by id
-PUT http://localhost:8080/types/update/6
+PUT http://localhost:8080/types/adm/update/4
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w
 
 {
-  "orderNumber": 980,
-  "nameUz": "Type4 uz",
-  "nameRu": "Type4 ru",
-  "nameEn": "Type4 en"
+  "orderNumber": {{$random.integer(10)}},
+  "nameUz": "{{$random.alphabetic(5)}} changed uz",
+  "nameRu": "{{$random.alphabetic(5)}} changed ru",
+  "nameEn": "{{$random.alphabetic(5)}} changed en"
 }
 
 ### Delete type by Id
-DELETE http://localhost:8080/types/delete/6
+DELETE http://localhost:8080/types/adm/delete/4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w

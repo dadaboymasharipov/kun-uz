@@ -1,12 +1,13 @@
 package com.example.kunuz.service;
 
-import com.example.kunuz.dto.auth.LoginDTO;
+import com.example.kunuz.dto.FilterResponseDTO;
 import com.example.kunuz.dto.profile.ProfileCreateDTO;
 import com.example.kunuz.dto.profile.ProfileDTO;
 import com.example.kunuz.dto.profile.ProfileFilterDTO;
+import com.example.kunuz.dto.profile.ProfileUpdateDTO;
 import com.example.kunuz.entity.ProfileEntity;
-import com.example.kunuz.enums.ProfileStatus;
 import com.example.kunuz.exception.AppBadException;
+import com.example.kunuz.repository.ProfileCustomRepository;
 import com.example.kunuz.repository.ProfileRepository;
 import com.example.kunuz.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProfileService {
 
     @Autowired
     private ProfileRepository profileRepository;
+    @Autowired
+    private ProfileCustomRepository profileCustomRepository;
 
     //TODO: receive photo here and save it with user
     public ProfileDTO create(ProfileCreateDTO dto) {
@@ -78,20 +80,24 @@ public class ProfileService {
         return new PageImpl<>(profileList, pageable, totalCount);
     }
 
-    public Boolean update(String id, ProfileCreateDTO dto) {
-
-//        if (profileRepository.existsByEmailAndVisibleTrue(dto.getEmail())){
-//            throw new AppBadException("This email is already registered");
-//        }
+    public Boolean updateAny(String id, ProfileCreateDTO dto) {
 
         ProfileEntity entity = get(id);
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
 //        entity.setEmail(dto.getEmail());//TODO: They need extra step verification
 //        entity.setPhone(dto.getPhone());
-//        entity.setRole(dto.getRole());
+        entity.setRole(dto.getRole());
 //        entity.setPassword(MD5Util.getMD5(dto.getPassword()));
-//        entity.setStatus(dto.getStatus());
+        entity.setStatus(dto.getStatus());
+        profileRepository.save(entity);
+        return true;
+    }
+
+    public Boolean updateCurrent(String id, ProfileUpdateDTO dto) {
+        ProfileEntity entity = get(id);
+        entity.setName(dto.getName());
+        entity.setSurname(dto.getSurname());
         profileRepository.save(entity);
         return true;
     }
@@ -102,8 +108,18 @@ public class ProfileService {
         return true;
     }
 
-    public PageImpl<ProfileDTO> filter(ProfileFilterDTO dto) {
-        return null;
+    public PageImpl<ProfileDTO> filter(ProfileFilterDTO dto, Integer page, Integer size) {
+        FilterResponseDTO<ProfileEntity> filterResponseDTO =
+                profileCustomRepository.filter(dto, page, size);
+
+        List<ProfileDTO> profileDTOList = new LinkedList<>();
+        for (ProfileEntity profileEntity : filterResponseDTO.getContent()) {
+            profileDTOList.add(mapToDto(profileEntity));
+        }
+        return new PageImpl<>(profileDTOList,
+                PageRequest.of(page, size),
+                filterResponseDTO.getTotalCount());
+
     }
 
 }

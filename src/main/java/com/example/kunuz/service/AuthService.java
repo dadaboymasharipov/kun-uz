@@ -13,7 +13,6 @@ import com.example.kunuz.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -54,7 +53,7 @@ public class AuthService {
 
         ProfileEntity entity = optional.get();
 
-        emailHistoryService.isNotExpiredEmail(entity.getEmail());// check for expireation date
+        emailHistoryService.isNotExpiredEmail(entity.getEmail());
 
         if (!entity.getVisible() || !entity.getStatus().equals(ProfileStatus.REGISTRATION)) {
             throw new AppBadException("Registration not completed");
@@ -71,8 +70,8 @@ public class AuthService {
         }
         ProfileEntity entity = optional.get();
 
-        if (!entity.getVisible() || !entity.getStatus().equals(ProfileStatus.REGISTRATION)) {
-            throw new AppBadException("Registration not completed");
+        if (!entity.getStatus().equals(ProfileStatus.REGISTRATION)) {
+            throw new AppBadException("Registration has already been completed");
         }
         emailHistoryService.checkEmailLimit(email);
         sendRegistrationEmail(entity.getId(), email);
@@ -82,30 +81,38 @@ public class AuthService {
     public void sendRegistrationEmail(String profileId, String email) {
         // send email
         String url = "http://localhost:8080/auth/verification/" + profileId;
-        String formatText = "<style>\n" +
-                "    a:link, a:visited {\n" +
-                "        background-color: #f44336;\n" +
-                "        color: white;\n" +
-                "        padding: 14px 25px;\n" +
-                "        text-align: center;\n" +
-                "        text-decoration: none;\n" +
-                "        display: inline-block;\n" +
-                "    }\n" +
+        String formatText = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <style>\n" +
+                "        a:link, a:visited {\n" +
+                "            background-color: #f44336;\n" +
+                "            color: white;\n" +
+                "            padding: 14px 25px;\n" +
+                "            text-align: center;\n" +
+                "            text-decoration: none;\n" +
+                "            display: inline-block;\n" +
+                "        }\n" +
                 "\n" +
-                "    a:hover, a:active {\n" +
-                "        background-color: red;\n" +
-                "    }\n" +
-                "</style>\n" +
+                "        a:hover, a:active {\n" +
+                "            background-color: red;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
                 "<div style=\"text-align: center\">\n" +
                 "    <h1>Welcome to kun.uz web portal</h1>\n" +
                 "    <br>\n" +
-                "    <p>Please button lick below to complete registration</p>\n" +
+                "    <p>Please click button below to complete registration</p>\n" +
                 "    <div style=\"text-align: center\">\n" +
                 "        <a href=\"%s\" target=\"_blank\">This is a link</a>\n" +
-                "    </div>";
+                "    </div>\n" +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>";
         String text = String.format(formatText, url);
         mailSenderService.send(email, "Complete registration", text);
-        emailHistoryService.crete(email, text); // create history
+        emailHistoryService.crete(email, text);
     }
 
     public ProfileDTO login(LoginDTO loginDTO) {
@@ -130,7 +137,7 @@ public class AuthService {
         dto.setPhone(entity.getPhone());
         dto.setRole(entity.getRole());
         dto.setStatus(entity.getStatus());
-        dto.setToken(JwtUtil.encode(entity.getId(), entity.getRole()));
+        dto.setToken(JwtUtil.encode(entity.getId(), entity.getEmail(), entity.getRole()));
         return dto;
     }
 }

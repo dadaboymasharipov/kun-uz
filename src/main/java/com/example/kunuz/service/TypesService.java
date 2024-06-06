@@ -49,7 +49,7 @@ public class TypesService {
     }
 
     public Page<CategoryDTO> getAllByPagination(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("created_date").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<TypesEntity> entities = typesRepository.findAll(pageable);
         List<CategoryDTO> result = new LinkedList<>();
 

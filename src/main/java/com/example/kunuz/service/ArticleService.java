@@ -2,18 +2,16 @@ package com.example.kunuz.service;
 
 import com.example.kunuz.dto.article.ArticleCreateDTO;
 import com.example.kunuz.dto.article.ArticleDTO;
-import com.example.kunuz.entity.*;
-import com.example.kunuz.enums.ArticleStatus;
+import com.example.kunuz.entity.ArticleEntity;
+import com.example.kunuz.entity.CategoryEntity;
+import com.example.kunuz.entity.RegionEntity;
 import com.example.kunuz.exception.AppBadException;
 import com.example.kunuz.repository.*;
+import com.example.kunuz.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static com.example.kunuz.enums.ArticleStatus.NOT_PUBLISHED;
-import static com.example.kunuz.enums.ArticleStatus.PUBLISHED;
 
 @Service
 public class ArticleService {
@@ -25,33 +23,24 @@ public class ArticleService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private TypesRepository typesRepository;
-    @Autowired
-    private ProfileRepository profileRepository;
+    private ArticleTypesService articleTypesService;
 
-    public ArticleDTO create(ArticleCreateDTO createDTO, String moderatorId) {
-        RegionEntity regionEntity = regionRepository.findById(createDTO.getRegionId())
-                .orElseThrow(() -> new AppBadException("Region is not found"));
-        CategoryEntity categoryEntity = categoryRepository.findById(createDTO.getCategoryId())
-                .orElseThrow(() -> new AppBadException("Category is not found"));
-        ProfileEntity moderator = profileRepository.findById(moderatorId).get();
+    public ArticleDTO create(ArticleCreateDTO createDTO) {
+        String moderatorId = SecurityUtil.getProfileId();
         //TODO: check if image exists
-        List<TypesEntity> types = typesRepository.findAllByIdIsInAndVisibleTrue(Arrays.asList(createDTO.getTypes()));
-
         ArticleEntity articleEntity = new ArticleEntity();
         articleEntity.setTitle(createDTO.getTitle());
         articleEntity.setDescription(createDTO.getDescription());
         articleEntity.setContent(createDTO.getContent());
         articleEntity.setSharedCount(0);
-        articleEntity.setRegion(regionEntity);
-        articleEntity.setCategory(categoryEntity);
-        articleEntity.setModerator(moderator);
-        //TODO: setPublisher(), setImage()
-        articleEntity.setStatus(PUBLISHED);
+        articleEntity.setRegionId(createDTO.getRegionId());
+        articleEntity.setCategoryId(createDTO.getCategoryId());
+        articleEntity.setModeratorId(moderatorId);
+        //TODO: setImage()
         articleEntity.setViewCount(0);
-        articleEntity.setTypes(types);
 
         articleRepository.save(articleEntity);
+        articleTypesService.create(articleEntity.getId(), createDTO.getTypes());
         return mapToDto(articleEntity);
     }
 
@@ -97,13 +86,12 @@ public class ArticleService {
         dto.setDescription(entity.getDescription());
         dto.setContent(entity.getContent());
         dto.setSharedCount(entity.getSharedCount());
-        dto.setRegion(entity.getRegion());
-        dto.setCategory(entity.getCategory());
+//        dto.setRegion(entity.getRegion());
+//        dto.setCategory(entity.getCategory());
         //TODO: setModerator(), setPublisher(), setImage()
-        dto.setStatus(PUBLISHED);
+        dto.setStatus(entity.getStatus());
         dto.setCreatedDate(entity.getCreatedDate());
         dto.setViewCount(entity.getViewCount());
-        dto.setTypes(entity.getTypes());
 
         return dto;
     }

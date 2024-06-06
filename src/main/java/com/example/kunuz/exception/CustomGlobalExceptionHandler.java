@@ -1,5 +1,6 @@
 package com.example.kunuz.exception;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
+                                                                  @NotNull HttpHeaders headers,
                                                                   HttpStatusCode status,
-                                                                  WebRequest request) {
+                                                                  @NotNull WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", status.value());
@@ -34,7 +35,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(AppBadException.class)
-    public ResponseEntity<String> handle(AppBadException ex) {
+    public ResponseEntity<String> handler(AppBadException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handler(RuntimeException ex) {
+        return ResponseEntity.internalServerError().body(ex.getMessage());
     }
 }

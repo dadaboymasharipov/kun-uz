@@ -1,40 +1,37 @@
 ### Create a profile
-###Correct token: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTcwODE2NjMsImlkIjoiZGQ1ZTU3MjAtNmI1NS00NGY1LTgzOTEtMjhjMWQ4ZDA1NmQ2Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTcxNjgwNjMsImlzcyI6Ikt1blV6VGVzdCJ9.B4I12C7mWjwl-V7p3BWQ_7gIBDphTBFkuiLpbYYpJVMDvfvLHVK8TSdI9a_XHmIUnw9RGHAb61OMBQ8_Jhd3jA
-POST http://localhost:8080/profile/create
+POST http://localhost:8080/profile/adm/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTcwODE2NjMsImlkIjoiZGQ1ZTU3MjAtNmI1NS00NGY1LTgzOTEtMjhjMWQ4ZDA1NmQ2Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTcxNjgwNjMsImlzcyI6Ikt1blV6VGVzdCJ9.B4I12C7mWjwl-V7p3BWQ_7gIBDphTBFkuiLpbYYpJVMDvfvLHVK8TSdI9a_XHmIUnw9RGHAb61OMBQ8_Jhd3jA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
 
 {
   "name": "Someone",
   "surname": "Someone",
-  "email": "121assas@gmail.com",
-  "phone": "+99891222",
+  "email": "someMail@mail.ru",
+  "phone": "+99891 111 11 11",
   "password": "12345",
   "status": "ACTIVE",
   "role": "ROLE_USER"
 }
 
-### Get profiles woth pagination
-GET http://localhost:8080/profile/pagination?page=1&size=10
+### Get profiles with pagination
+GET http://localhost:8080/profile/adm/pagination?page=1&size=1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
+
 
 ### Update profile
-PUT http://localhost:8080/profile/update/dd5e5720-6b55-44f5-8391-28c1d8d056d6
+PUT http://localhost:8080/profile/adm/update/9f86ede3-6e7b-4831-9356-ed5dfa02e3b0
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
 
 {
   "name": "updated name",
-  "surname": "updated surname",
-  "email": "updatedemail@gmail.com",
-  "phone": "updated phone",
-  "password": "2003",
-  "status": "ACTIVE",
-  "role": "ROLE_USER"
+  "surname": "updated surname"
 }
 
-### Update profile
-PUT http://localhost:8080/profile/current
+### Update current user's profile
+PUT http://localhost:8080/profile/current/e0180322-e7e1-4725-9d9c-d62b911fbc2f
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTY5MTAwMjksImlkIjoiZGQ1ZTU3MjAtNmI1NS00NGY1LTgzOTEtMjhjMWQ4ZDA1NmQ2Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcxNjk5NjQyOSwiaXNzIjoiS3VuVXpUZXN0In0.YU1djSWvB-YtwfESrLrQifF1ge3TSGEai0YZRHfNUENdKMzZ-0RavWvKYDimRB-j5xGUh-mFGBir1IrJ-Cq3_A
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0Njc2NzQsImlkIjoiZTAxODAzMjItZTdlMS00NzI1LTlkOWMtZDYyYjkxMWZiYzJmIiwicm9sZSI6IlJPTEVfVVNFUiIsInVzZXJuYW1lIjoic29tZU1haWxAbWFpbC5ydSIsImV4cCI6MTcxNzU1NDA3NCwiaXNzIjoiS3VuVXpUZXN0In0.Cmbe2OpnKbzfmpANk6I9E7fmO2Izip_feSLExrugiBshrpcNZkG9sC8Nj6wqs3RFOmSqyRBgLU7zPLuQJssJBA
 
 {
   "name": "updated name",
@@ -47,4 +44,15 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTY5MTAwMjksImlkIjoiZGQ1Z
 }
 
 ### Delete profile by id
-DELETE http://localhost:8080/profile/delete/3b3f87db-ab70-42ad-b5d0-efd75b9c85d5
+DELETE http://localhost:8080/profile/adm/delete/9f86ede3-6e7b-4831-9356-ed5dfa02e3b0
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
+
+### Profile Filter
+POST http://localhost:8080/profile/filter?page=1&size=2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NTgzNjUsImlkIjoiZGY3ZjQ1ZTMtZDE3My00NDQwLWIyMGEtMDY2YmE2M2NiMzE4Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NDc2NSwiaXNzIjoiS3VuVXpUZXN0In0.JEuacuea9frbMH1fav7J4tJw6M6_UMxBHCYWXSnb6Tcx_8nT8sHXopzVN08k2XlO8tBTPRaDrkQ7-lLVN-d2fA
+
+{
+  "name": "new Account",
+  "surname": "new Account"
+}

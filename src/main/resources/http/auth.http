@@ -3,18 +3,20 @@ POST http://localhost:8080/auth/registration
 Content-Type: application/json
 
 {
-  "name": "Ali",
-  "surname": "Aliyev",
-  "email": "dadaboymasharipov@gmail.com",
-  "password": "123"
+  "name": "new Account",
+  "surname": "new Account",
+  "email": "dadaboymasharipov512@gmail.com",
+  "password": "12345"
 }
 
+###Resend email
+GET http://localhost:8080/auth/registration/resend/dadaboymasharipov512@gmail.com
 
 ### Login
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "login": "aliolimov@gmail.com",
+  "login": "dadaboymasharipov512@gmail.com",
   "password": "12345"
 }

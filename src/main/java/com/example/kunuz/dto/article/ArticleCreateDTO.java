@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 public class ArticleCreateDTO {
@@ -27,6 +29,6 @@ public class ArticleCreateDTO {
 //    @NotNull(message = "publisher_id cannot be null")
     private String publisherId;
     @NotEmpty(message = "types cannot be empty")
-    private Integer[] types;
+    private List<Integer> types;
 }
 
