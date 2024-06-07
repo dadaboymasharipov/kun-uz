@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
+@EnableMethodSecurity()
 public class SecurityConfig {
 
     @Autowired
@@ -25,25 +27,6 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        /* authentication
-        String password = UUID.randomUUID().toString();
-        System.out.println("User Password: " + password);
-
-        UserDetails user = User.builder()
-                .username("user")
-                .password("{noop}" + password)
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password("{noop}admin")
-                .roles("ADMIN")
-                .build();
-
-        final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(new InMemoryUserDetailsManager(user, admin));
-        return authenticationProvider;*/
 
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(customUserDetailsService);
@@ -56,7 +39,7 @@ public class SecurityConfig {
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence rawPassword) {
-                return rawPassword.toString();//TODO: check here should be encoded or it's ok
+                return rawPassword.toString();
             }
 
             @Override
@@ -70,20 +53,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                 authorizationManagerRequestMatcherRegistry
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/profile/adm/**").hasRole("ADMIN")
-                        .requestMatchers("/profile/current/*").hasRole("USER")
-                        .requestMatchers("/region/lang").permitAll()
-                        .requestMatchers("/region/adm/**").hasRole("ADMIN")
-                        .requestMatchers("/types/adm/**").hasRole("ADMIN")
-                        .requestMatchers("/types/lang").permitAll()
-                        .requestMatchers("/category/adm/**").hasRole("ADMIN")
-                        .requestMatchers("/category/lang").permitAll()
-                        .requestMatchers("/article/moderator", "/article/moderator/**").hasRole("MODERATOR")
+                        .requestMatchers("/auth/**", "/region/lang", "/types/lang", "/category/lang").permitAll()
+//                        .requestMatchers("/profile/current/*").hasRole("USER")
                         .anyRequest()
                         .authenticated());
 
-//        http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);
 

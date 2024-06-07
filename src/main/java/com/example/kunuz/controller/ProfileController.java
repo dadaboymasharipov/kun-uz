@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,24 +19,28 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-    @PostMapping("/adm/create")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/create")
     public ResponseEntity<ProfileDTO> create(@Valid @RequestBody ProfileCreateDTO dto) {
         ProfileDTO profileDTO = profileService.create(dto);
         return ResponseEntity.ok(profileDTO);
     }
 
-    @GetMapping("/adm/pagination")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/pagination")
     public ResponseEntity<PageImpl<ProfileDTO>> getAllByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                              @RequestParam(value = "size", defaultValue = "10") Integer size) {
         PageImpl<ProfileDTO> profilePage = profileService.getAllByPage(page - 1, size);
         return ResponseEntity.ok(profilePage);
     }
 
-    @PutMapping("/adm/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Boolean> updateForAdmin(@RequestBody @Valid ProfileCreateDTO dto,
                                                   @PathVariable("id") String id) {
         return ResponseEntity.ok(profileService.updateAny(id, dto));
     }
+
 
     @PutMapping("/current/{id}")
     public ResponseEntity<Boolean> updateUser(@Valid @RequestBody ProfileUpdateDTO profile,
@@ -43,7 +48,8 @@ public class ProfileController {
         return ResponseEntity.ok().body(profileService.updateCurrent(id, profile));
     }
 
-    @DeleteMapping("/adm/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") String id) {
         return ResponseEntity.ok(profileService.delete(id));
     }

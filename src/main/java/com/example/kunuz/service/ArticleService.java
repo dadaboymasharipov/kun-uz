@@ -3,10 +3,10 @@ package com.example.kunuz.service;
 import com.example.kunuz.dto.article.ArticleCreateDTO;
 import com.example.kunuz.dto.article.ArticleDTO;
 import com.example.kunuz.entity.ArticleEntity;
-import com.example.kunuz.entity.CategoryEntity;
-import com.example.kunuz.entity.RegionEntity;
 import com.example.kunuz.exception.AppBadException;
-import com.example.kunuz.repository.*;
+import com.example.kunuz.repository.ArticleRepository;
+import com.example.kunuz.repository.CategoryRepository;
+import com.example.kunuz.repository.RegionRepository;
 import com.example.kunuz.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class ArticleService {
         articleEntity.setRegionId(dto.getRegionId());
         articleEntity.setCategoryId(dto.getCategoryId());
         articleEntity.setModeratorId(moderatorId);
-        //TODO: setImage()
+//        articleEntity.setImageId(dto.getImageId());
         articleEntity.setViewCount(0);
 
         articleRepository.save(articleEntity);
@@ -51,7 +51,7 @@ public class ArticleService {
         articleEntity.setContent(dto.getContent());
         articleEntity.setDescription(dto.getDescription());
         articleEntity.setSharedCount(dto.getSharedCount());
-        // TODO: remove old image -> setImage()
+//        articleEntity.setImageId(dto.getImageId());
         articleEntity.setRegionId(dto.getRegionId());
         articleEntity.setCategoryId(dto.getCategoryId());
         articleEntity.setStatus(NOT_PUBLISHED);

@@ -28,9 +28,12 @@ public class ArticleEntity {
     @Column(name = "shared_count")
     private long sharedCount;
 
-    @JoinColumn(name = "photo_id")
+    @JoinColumn(name = "photo_id",  updatable = false, insertable = false)
     @OneToOne(fetch = FetchType.LAZY)
     private AttachmentEntity image;
+
+    @Column(name = "image_id")
+    private String  imageId;
 
     @JoinColumn(name = "region_id", insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)

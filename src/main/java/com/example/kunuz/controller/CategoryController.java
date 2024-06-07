@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +19,15 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/adm/create")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/create")
     public ResponseEntity<CategoryDTO> create(@Valid @RequestBody CategoryCreateDTO category) {
         CategoryDTO response = categoryService.create(category);
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/adm/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/all")
     public ResponseEntity<List<CategoryDTO>> all() {
         return ResponseEntity.ok().body(categoryService.getAll());
     }
@@ -35,14 +38,14 @@ public class CategoryController {
         List<CategoryDTO> regionDTOList = categoryService.getAllByLang(lang);
         return ResponseEntity.ok().body(regionDTOList);
     }
-
-    @PutMapping("/adm/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/{id}")
     public HttpEntity<Boolean> update(@PathVariable("id") Integer id,
                                       @RequestBody @Valid CategoryCreateDTO region) {
         return ResponseEntity.ok(categoryService.update(id, region));
     }
-
-    @DeleteMapping("/adm/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(categoryService.delete(id));
     }

@@ -11,6 +11,8 @@ public interface EmailHistoryRepository extends JpaRepository<EmailHistoryEntity
 
     List<EmailHistoryEntity> findAllByEmail(String email);
 
+    List<EmailHistoryEntity> findAllByCreatedDate(LocalDateTime createdDate);
+
     Long countByEmailAndCreatedDateBetween(String email, LocalDateTime from, LocalDateTime to);
 
     Optional<EmailHistoryEntity> findTopByEmailOrderByCreatedDateDesc(String email);

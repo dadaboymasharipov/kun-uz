@@ -1,12 +1,12 @@
 ###Create Article MODERATOR
 POST http://localhost:8080/article/moderator
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NzkwMTksImlkIjoiYzc1NjY3ZWQtNjYyOS00NGUyLWIzOTEtOGY5ZGFkNDhhNmM0Iiwicm9sZSI6IlJPTEVfVVNFUiIsInVzZXJuYW1lIjoicmFuZG9tRW1haWxAZ21haWwuY29tIiwiZXhwIjoxNzE3NzY1NDE5LCJpc3MiOiJLdW5VelRlc3QifQ.FpkmxCzWyxSs_jQtpNaqWZwXpfsUTD0MqO4xfsJfGh4dMkSa3SN9KVoTpl920rn4xEa_fus76p4c_hT4IH9htw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlMjA1MjktODc5Yi00YjM5LWFkNjUtNGRmZDAyYmNiZDJhIiwicm9sZSI6IlJPTEVfTU9ERVJBVE9SIiwidXNlcm5hbWUiOiJyYW5kb21FbWFpbEBnbWFpbC5jb20iLCJleHAiOjE3MjAyNzgwODYsImlzcyI6Ikt1blV6VGVzdCJ9.AAyfFKqZlYIC5pHgS3UtnoP13zyrP_mp-SPprsVIYgfyKDPwqoPeoAMx2iathaPVnL96UONe4kK1goHy96pMgQ
 
 {
-  "title": "createArticle",
-  "description": "This article is a test article",
-  "content": "Some article",
+  "title": "{{$random.alphabetic(10)}}",
+  "description": "{{$random.alphabetic(10)}}",
+  "content": "{{$random.alphabetic(10)}}",
   "imageId": 1,
   "regionId": 1,
   "categoryId": 1,
@@ -15,19 +15,20 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NzkwMTksImlkIjoiYzc1N
 }
 
 ### Update article MODERATOR
-POST http://localhost:8080/article/moderator/{{id}}
+PUT http://localhost:8080/article/moderator/b6c74aa5-79a3-4ebe-ae2d-c157dfc5faa1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlMjA1MjktODc5Yi00YjM5LWFkNjUtNGRmZDAyYmNiZDJhIiwicm9sZSI6IlJPTEVfTU9ERVJBVE9SIiwidXNlcm5hbWUiOiJyYW5kb21FbWFpbEBnbWFpbC5jb20iLCJleHAiOjE3MjAyNzgwODYsImlzcyI6Ikt1blV6VGVzdCJ9.AAyfFKqZlYIC5pHgS3UtnoP13zyrP_mp-SPprsVIYgfyKDPwqoPeoAMx2iathaPVnL96UONe4kK1goHy96pMgQ
 
 {
-  "title": "new title",
-  "description": "new description",
-  "content": "some changes have been made",
-  "sharedCount": 100000,
+  "title": "{{$random.alphabetic(10)}} changed",
+  "description": "{{$random.alphabetic(10)}} changed",
+  "content": "{{$random.alphabetic(10)}} changed",
+  "sharedCount": {{$random.integer(1000)}},
   "imageId": 1,
   "regionId": 2,
   "categoryId": 3,
   "publisherId": "uuid2",
-  "types": [2]
+  "types": [2, 4]
 }
 
 ### Delete by id MODERATOR

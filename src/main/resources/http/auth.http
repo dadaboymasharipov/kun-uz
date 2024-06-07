@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "{{$random.alphabetic(6)}}",
   "surname": "{{$random.alphabetic(6)}}",
-  "email": "randomEmail@gmail.com",
+  "email": "adminEmail@gmail.com",
   "password": "12345"
 }
 

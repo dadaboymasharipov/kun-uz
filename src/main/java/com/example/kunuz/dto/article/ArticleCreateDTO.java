@@ -18,8 +18,8 @@ public class ArticleCreateDTO {
     @NotBlank(message = "content cannot be blank")
     private String content;
     private long sharedCount;
-    @NotNull(message = "image cannot be null")
-    private Integer imageId;
+    @NotBlank(message = "image cannot be blank")
+    private String imageId;
     @NotNull(message = "region_id cannot be null")
     private Integer regionId;
     @NotNull(message = "category_id cannot be null")

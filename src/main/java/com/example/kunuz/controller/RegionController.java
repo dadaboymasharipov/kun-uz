@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +19,15 @@ public class RegionController {
     @Autowired
     private RegionService regionService;
 
-    @PostMapping("/adm/create")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/create")
     public ResponseEntity<RegionDTO> create(@Valid @RequestBody RegionCreateDTO region) {
         RegionDTO response = regionService.create(region);
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/adm/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/all")
     public ResponseEntity<List<RegionDTO>> all() {
         return ResponseEntity.ok().body(regionService.getAll());
     }
@@ -36,13 +39,15 @@ public class RegionController {
         return ResponseEntity.ok().body(regionDTOList);
     }
 
-    @PutMapping("/adm/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/{id}")
     public HttpEntity<Boolean> update(@PathVariable("id") Integer id,
                                       @RequestBody @Valid RegionCreateDTO region) {
         return ResponseEntity.ok(regionService.update(id, region));
     }
 
-    @DeleteMapping("/adm/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(regionService.delete(id));
     }

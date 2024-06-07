@@ -6,6 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "attachment")
 public class AttachmentEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 }

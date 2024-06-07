@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,13 +20,15 @@ public class TypesController {
     @Autowired
     private TypesService typesService;
 
-    @PostMapping("/adm/create")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/create")
     public ResponseEntity<CategoryDTO> create(@Valid @RequestBody TypesCreateDTO typesCreateDTO) {
         CategoryDTO type = typesService.create(typesCreateDTO);
         return ResponseEntity.ok(type);
     }
 
-    @GetMapping("/adm/getAll")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/getAll")
     public ResponseEntity<Page<CategoryDTO>> getAllByPage(@RequestParam("page") Integer page,
                                                           @RequestParam("size") Integer size) {
         Page<CategoryDTO> list = typesService.getAllByPagination(page - 1, size);
@@ -39,14 +42,16 @@ public class TypesController {
         return ResponseEntity.ok(list);
     }
 
-    @PutMapping("/adm/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Boolean> update(@PathVariable("id") Integer id,
                                           @Valid @RequestBody TypesCreateDTO typesCreateDTO) {
         Boolean result = typesService.update(id, typesCreateDTO);
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("/adm/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(typesService.delete(id));
     }

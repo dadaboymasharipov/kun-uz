@@ -6,6 +6,7 @@ import com.example.kunuz.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +16,14 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @PreAuthorize("hasRole('MODERATOR')")
     @PostMapping("/moderator")
     public HttpEntity<ArticleDTO> create(@RequestBody ArticleCreateDTO dto) {
         ArticleDTO articleDTO = articleService.create(dto);
         return ResponseEntity.ok(articleDTO);
     }
 
+    @PreAuthorize("hasAnyRole('MODERATOR', 'PUBLISHER')")
     @PutMapping("/moderator/{id}")
     public HttpEntity<Boolean> update(@RequestBody ArticleCreateDTO dto,
                                       @PathVariable("id") String id) {
@@ -28,13 +31,15 @@ public class ArticleController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/moderator/delete/{id}")
+    @PreAuthorize("hasRole('MODERATOR')")
+    @DeleteMapping("/moderator/{id}")
     public HttpEntity<Boolean> delete(@PathVariable String id) {
         Boolean updated = articleService.delete(id);
         return ResponseEntity.ok(updated);
     }
 
-    @PutMapping("/moderator/status/{id}")
+    @PreAuthorize("hasRole('PUBLISHER')")
+    @PutMapping("/status/{id}")
     public HttpEntity<Boolean> changeStatus(@PathVariable("id") String id,
                                             @RequestBody ArticleDTO articleDTO) {
         Boolean updated = articleService.changeStatus(id, articleDTO);
