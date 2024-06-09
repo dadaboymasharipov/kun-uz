@@ -26,6 +26,8 @@ public class ArticleDTO {
 //    private ProfileEntity publisher;
     private ArticleStatus status;
     private LocalDateTime createdDate;
+    private LocalDateTime publishedDate;
+
     private long viewCount;
-    private List<TypesEntity> types;
+    private List<Integer> types;
 }

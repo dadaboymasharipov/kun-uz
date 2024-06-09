@@ -1,31 +1,31 @@
 ### Create a profile
-POST http://localhost:8080/profile/adm/create
+POST http://localhost:8080/profile/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
 
 {
-  "name": "Someone",
-  "surname": "Someone",
+  "name": "{{$random.alphabetic(7)}}",
+  "surname": "{{$random.alphabetic(7)}}",
   "email": "someMail@mail.ru",
-  "phone": "+99891 111 11 11",
+  "phone": "{{$random.alphanumeric(7)}}",
   "password": "12345",
   "status": "ACTIVE",
   "role": "ROLE_USER"
 }
 
 ### Get profiles with pagination
-GET http://localhost:8080/profile/adm/pagination?page=1&size=1
+GET http://localhost:8080/profile/pagination?page=1&size=1
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
 
 
 ### Update profile
-PUT http://localhost:8080/profile/adm/update/9f86ede3-6e7b-4831-9356-ed5dfa02e3b0
+PUT http://localhost:8080/profile/update/9f86ede3-6e7b-4831-9356-ed5dfa02e3b0
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
 
 {
-  "name": "updated name",
-  "surname": "updated surname"
+  "name": "{{$random.alphabetic(7)}} updated",
+  "surname": "{{$random.alphabetic(7)}} updated"
 }
 
 ### Update current user's profile
@@ -34,17 +34,17 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0Njc2NzQsImlkIjoiZTAxODAzMjItZTdlMS00NzI1LTlkOWMtZDYyYjkxMWZiYzJmIiwicm9sZSI6IlJPTEVfVVNFUiIsInVzZXJuYW1lIjoic29tZU1haWxAbWFpbC5ydSIsImV4cCI6MTcxNzU1NDA3NCwiaXNzIjoiS3VuVXpUZXN0In0.Cmbe2OpnKbzfmpANk6I9E7fmO2Izip_feSLExrugiBshrpcNZkG9sC8Nj6wqs3RFOmSqyRBgLU7zPLuQJssJBA
 
 {
-  "name": "updated name",
-  "surname": "updated surname",
+  "name": "{{$random.alphabetic(7)}} updated",
+  "surname": "{{$random.alphabetic(7)}} updated",
   "email": "updatedemail@gmail.com",
-  "phone": "updated phone",
+  "phone": "{{$random.alphabetic(7)}} updated",
   "password": "2003",
   "status": "ACTIVE",
   "role": "ROLE_USER"
 }
 
 ### Delete profile by id
-DELETE http://localhost:8080/profile/adm/delete/9f86ede3-6e7b-4831-9356-ed5dfa02e3b0
+DELETE http://localhost:8080/profile/delete/9f86ede3-6e7b-4831-9356-ed5dfa02e3b0
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc0NjUyMTksImlkIjoiZTRmZDc0NDItMDE3ZS00Mzk3LWJiMzctZTZjYWZhNWQ1NWU5Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92QGdtYWlsLmNvbSIsImV4cCI6MTcxNzU1MTYxOSwiaXNzIjoiS3VuVXpUZXN0In0.bI-owhYuGStzBog3RADbER_PyJbw4BamVSjdH0RHpWFnwZuCc4cLNmWW_I0BLhm1k-B-f-yHcae7qU1Q84mUdQ
 
 ### Profile Filter
@@ -56,3 +56,5 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NTgzNjUsImlkIjoiZGY3Z
   "name": "new Account",
   "surname": "new Account"
 }
+
+

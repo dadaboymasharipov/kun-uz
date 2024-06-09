@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "article_types")
+@Table(name = "article_type")
 @Getter
 @Setter
 public class ArticleTypesEntity {
@@ -19,10 +19,10 @@ public class ArticleTypesEntity {
     @JoinColumn(name = "article_id", insertable = false, updatable = false)
     private ArticleEntity article;
 
-    @Column(name = "types_id")
+    @Column(name = "type_id")
     private Integer typesId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "types_id", insertable = false, updatable = false)
+    @JoinColumn(name = "type_id", insertable = false, updatable = false)
     private TypesEntity types;
 
 }

@@ -1,0 +1,11 @@
+### Post Attachment
+POST http://localhost:8080/attach/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="donkey.jpg"
+
+< C:\Users\dadab\OneDrive\Desktop\donkey.jpg
+
+### Get Attachment
+GET http://localhost:8080/attach/open/4bdf1605-303c-442b-98d8-c401810af68b.jpg

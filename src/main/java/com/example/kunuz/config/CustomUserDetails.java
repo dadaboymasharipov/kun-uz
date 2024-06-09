@@ -12,6 +12,7 @@ import java.util.List;
 import static com.example.kunuz.enums.ProfileStatus.ACTIVE;
 
 public class CustomUserDetails implements UserDetails {
+
     private ProfileEntity profile;
 
     public CustomUserDetails(ProfileEntity profile) {

@@ -1,5 +1,5 @@
 ### Create region
-POST localhost:8080/region/adm/create
+POST localhost:8080/region/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODU5NzUsImlkIjoiZGJiZmM5YzYtNjE2Mi00YmIyLTllYTctY2YxMjY3ODViZGVlIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImFkbWluRW1haWxAZ21haWwuY29tIiwiZXhwIjoxNzIwMjc3OTc1LCJpc3MiOiJLdW5VelRlc3QifQ.fB7gFCwaa9PIxezZ-KGHyj1WzA7mSjewrBxkwuQBwpTQHArGZ35AJKlXzCPgqY98ZOv8crLr_MOoJWwpvN-6sw
 
@@ -11,7 +11,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODU5NzUsImlkIjoiZGJiZ
 }
 
 ### Get all regions for ADMIN
-GET http://localhost:8080/region/adm/all
+GET http://localhost:8080/region/all
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w
 
 
@@ -20,7 +20,7 @@ GET localhost:8080/region/lang
 Accept-Language: EN
 
 ### Update region by Id
-PUT http://localhost:8080/region/adm/update/4
+PUT http://localhost:8080/region/update/4
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w
 
@@ -32,5 +32,5 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmY
 }
 
 ### Delete Region by Id
-DELETE http://localhost:8080/region/adm/delete/4
+DELETE http://localhost:8080/region/delete/4
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2NjA5MjIsImlkIjoiMDJmYjMwYjAtNWViYS00ZWJjLTllZTgtZDFkYWZhZWNjZjZiIiwicm9sZSI6IlJPTEVfQURNSU4iLCJ1c2VybmFtZSI6ImRhZGFib3ltYXNoYXJpcG92NTEyQGdtYWlsLmNvbSIsImV4cCI6MTcxNzc0NzMyMiwiaXNzIjoiS3VuVXpUZXN0In0.0rC1RZGnsQdZBMfs7nycNDSQn0e9cZehqNn6FvKqQUR5dooisL7_nKrOayRCae99JTGAML6TEASStaNeb2Tg1w

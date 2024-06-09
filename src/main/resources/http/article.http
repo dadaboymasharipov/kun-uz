@@ -7,14 +7,14 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlM
   "title": "{{$random.alphabetic(10)}}",
   "description": "{{$random.alphabetic(10)}}",
   "content": "{{$random.alphabetic(10)}}",
-  "imageId": 1,
-  "regionId": 1,
-  "categoryId": 1,
+  "imageId": "1",
+  "regionId": {{$random.integer(1, 3)}},
+  "categoryId": {{$random.integer(1,3)}},
   "publisherId": "UUID",
-  "types": [1,2,3]
+  "types": [{{$random.integer(1, 6)}}, {{$random.integer(1, 6)}}, {{$random.integer(1, 6)}}]
 }
 
-### Update article MODERATOR
+### Update article MODERATOR, PUBLISHER
 PUT http://localhost:8080/article/moderator/b6c74aa5-79a3-4ebe-ae2d-c157dfc5faa1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlMjA1MjktODc5Yi00YjM5LWFkNjUtNGRmZDAyYmNiZDJhIiwicm9sZSI6IlJPTEVfTU9ERVJBVE9SIiwidXNlcm5hbWUiOiJyYW5kb21FbWFpbEBnbWFpbC5jb20iLCJleHAiOjE3MjAyNzgwODYsImlzcyI6Ikt1blV6VGVzdCJ9.AAyfFKqZlYIC5pHgS3UtnoP13zyrP_mp-SPprsVIYgfyKDPwqoPeoAMx2iathaPVnL96UONe4kK1goHy96pMgQ
@@ -24,11 +24,11 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlM
   "description": "{{$random.alphabetic(10)}} changed",
   "content": "{{$random.alphabetic(10)}} changed",
   "sharedCount": {{$random.integer(1000)}},
-  "imageId": 1,
-  "regionId": 2,
-  "categoryId": 3,
-  "publisherId": "uuid2",
-  "types": [2, 4]
+  "imageId": "1",
+  "regionId": {{$random.integer(1,3)}},
+  "categoryId": {{$random.integer(1,3)}},
+  "publisherId": "{{$random.uuid}}",
+  "types": [{{$random.integer(1, 6)}}, {{$random.integer(1, 6)}},  {{$random.integer(1, 6)}}]
 }
 
 ### Delete by id MODERATOR
@@ -36,3 +36,19 @@ DELETE http://localhost:8080/article/delete/{{id}}
 
 ### Change status by id MODERATOR
 PUT http://localhost:8080/article/status/{{id}}?status=NOT_PUBLISHED
+
+### Get last 5 by types
+GET http://localhost:8080/article/last5ByTypes/{{typeId}}
+
+### Get last 3 by types
+GET http://localhost:8080/article/last3ByTypes/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlMjA1MjktODc5Yi00YjM5LWFkNjUtNGRmZDAyYmNiZDJhIiwicm9sZSI6IlJPTEVfTU9ERVJBVE9SIiwidXNlcm5hbWUiOiJyYW5kb21FbWFpbEBnbWFpbC5jb20iLCJleHAiOjE3MjAyNzgwODYsImlzcyI6Ikt1blV6VGVzdCJ9.AAyfFKqZlYIC5pHgS3UtnoP13zyrP_mp-SPprsVIYgfyKDPwqoPeoAMx2iathaPVnL96UONe4kK1goHy96pMgQ
+
+###
+POST http://localhost:8080/article/last8NotIncludeTypes
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTc2ODYwODYsImlkIjoiZGJlMjA1MjktODc5Yi00YjM5LWFkNjUtNGRmZDAyYmNiZDJhIiwicm9sZSI6IlJPTEVfTU9ERVJBVE9SIiwidXNlcm5hbWUiOiJyYW5kb21FbWFpbEBnbWFpbC5jb20iLCJleHAiOjE3MjAyNzgwODYsImlzcyI6Ikt1blV6VGVzdCJ9.AAyfFKqZlYIC5pHgS3UtnoP13zyrP_mp-SPprsVIYgfyKDPwqoPeoAMx2iathaPVnL96UONe4kK1goHy96pMgQ
+Content-Type: application/json
+
+{
+  "types": [1, 3]
+}
